@@ -3,15 +3,14 @@
 #include "iofile.h"
 
 /* Miscellaneous */
-long getFileSize(FILE *f) {
+static long getFileSize(FILE *f) {
 	fseek(f, 0, SEEK_END);
 	long size = ftell(f);
 	fseek(f, 0, SEEK_SET);
 
 	return size;
 }
-
-void printBase(void *buffer, long size, int base) {
+void printBase(const void *buffer, long size, int base) {
 	#define bin 0
 	#define oct 1
 	#define hex 2
@@ -44,6 +43,8 @@ void printBase(void *buffer, long size, int base) {
 	}
 }
 
+
+
 /* READ FILE */
 void *readFile(const char *fileName, long *bufferSize) {
 	#define NULL 0
@@ -67,8 +68,6 @@ void *readFile(const char *fileName, long *bufferSize) {
 
 	return BUFFER;
 }
-
-
 
 /* WRITE FILE */
 int writeFile(const char *fileName, void *buffer, long bufferSize) {
